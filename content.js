@@ -134,60 +134,60 @@ function loadNotes(primaryKey, callback) {
     });
 }
 
-function openPopup() {
-    // Check if the popup already exists
-    if (document.getElementById("dsaTrackerPopup")) return;
+// function openPopup() {
+//     // Check if the popup already exists
+//     if (document.getElementById("dsaTrackerPopup")) return;
 
-    // Create the popup container
-    const popup = document.createElement("div");
-    popup.id = "dsaTrackerPopup";
+//     // Create the popup container
+//     const popup = document.createElement("div");
+//     popup.id = "dsaTrackerPopup";
 
-    // Problem Name Display (Read-Only)
-    const problemNameLabel = document.createElement("label");
-    problemNameLabel.innerText = `Problem: ${problemName}`;
+//     // Problem Name Display (Read-Only)
+//     const problemNameLabel = document.createElement("label");
+//     problemNameLabel.innerText = `Problem: ${problemName}`;
 
-    // Notes Input Field
-    const notesInput = document.createElement("textarea");
-    notesInput.id = "dsaTrackerNotes";
-    notesInput.placeholder = "Write your notes here...";
+//     // Notes Input Field
+//     const notesInput = document.createElement("textarea");
+//     notesInput.id = "dsaTrackerNotes";
+//     notesInput.placeholder = "Write your notes here...";
 
-    // Buttons Container
-    const buttonContainer = document.createElement("div");
-    buttonContainer.className = "button-container";
+//     // Buttons Container
+//     const buttonContainer = document.createElement("div");
+//     buttonContainer.className = "button-container";
 
-    // Save Button
-    const saveButton = document.createElement("button");
-    saveButton.innerText = "Save";
-    saveButton.className = "save-button";
-    saveButton.onclick = function () {
-        saveNotes(primaryKey, platformName, problemName, problemUrl, notesInput.value);
-        document.body.removeChild(popup);
-    };
+//     // Save Button
+//     const saveButton = document.createElement("button");
+//     saveButton.innerText = "Save";
+//     saveButton.className = "save-button";
+//     saveButton.onclick = function () {
+//         saveNotes(primaryKey, platformName, problemName, problemUrl, notesInput.value);
+//         document.body.removeChild(popup);
+//     };
 
-    // Cancel Button
-    const cancelButton = document.createElement("button");
-    cancelButton.innerText = "Cancel";
-    cancelButton.className = "cancel-button";
-    cancelButton.onclick = function () {
-        togglePopup();
-        document.body.removeChild(popup);
-    };
+//     // Cancel Button
+//     const cancelButton = document.createElement("button");
+//     cancelButton.innerText = "Cancel";
+//     cancelButton.className = "cancel-button";
+//     cancelButton.onclick = function () {
+//         togglePopup();
+//         document.body.removeChild(popup);
+//     };
 
-    // Append elements
-    buttonContainer.appendChild(saveButton);
-    buttonContainer.appendChild(cancelButton);
-    popup.appendChild(problemNameLabel);
-    popup.appendChild(notesInput);
-    popup.appendChild(buttonContainer);
-    document.body.appendChild(popup);
+//     // Append elements
+//     buttonContainer.appendChild(saveButton);
+//     buttonContainer.appendChild(cancelButton);
+//     popup.appendChild(problemNameLabel);
+//     popup.appendChild(notesInput);
+//     popup.appendChild(buttonContainer);
+//     document.body.appendChild(popup);
 
-    // Load existing notes (if any)
-    loadNotes(primaryKey, (data) => {
-        if (data) {
-            notesInput.value = data.notes;
-        }
-    });
-}
+//     // Load existing notes (if any)
+//     loadNotes(primaryKey, (data) => {
+//         if (data) {
+//             notesInput.value = data.notes;
+//         }
+//     });
+// }
 
 async function saveNotes(primaryKey, platformName, problemName, problemUrl, notes) {
     try {
@@ -226,74 +226,74 @@ function togglePopup() {
     }
 }
 
-// function openPopup() {
-//     if (document.getElementById("dsaTrackerPopup")) return;
+function openPopup() {
+    if (document.getElementById("dsaTrackerPopup")) return;
 
-//     const popup = document.createElement("div");
-//     popup.id = "dsaTrackerPopup";
-//     popup.classList.add("draggable");
+    const popup = document.createElement("div");
+    popup.id = "dsaTrackerPopup";
+    popup.classList.add("draggable");
 
-//     // Popup Header for Dragging
-//     const popupHeader = document.createElement("div");
-//     popupHeader.id = "dsaTrackerPopupHeader";
-//     popupHeader.innerText = "Drag Me";
-//     popupHeader.style.cursor = "move";
-//     popupHeader.style.backgroundColor = "#f1f1f1";
-//     popupHeader.style.padding = "5px";
-//     popupHeader.style.fontWeight = "bold";
-//     popupHeader.style.textAlign = "center";
-//     popupHeader.style.borderRadius = "8px 8px 0 0";
+    // Popup Header for Dragging
+    const popupHeader = document.createElement("div");
+    popupHeader.id = "dsaTrackerPopupHeader";
+    popupHeader.innerText = "Drag Me";
+    popupHeader.style.cursor = "move";
+    popupHeader.style.backgroundColor = "#f1f1f1";
+    popupHeader.style.padding = "5px";
+    popupHeader.style.fontWeight = "bold";
+    popupHeader.style.textAlign = "center";
+    popupHeader.style.borderRadius = "8px 8px 0 0";
 
-//     // Problem Name Display (Read-Only)
-//     const problemNameLabel = document.createElement("label");
-//     problemNameLabel.innerText = `Problem: ${problemName}`;
+    // Problem Name Display (Read-Only)
+    const problemNameLabel = document.createElement("label");
+    problemNameLabel.innerText = `Problem: ${problemName}`;
 
-//     // Notes Input Field (Resizable)
-//     const notesInput = document.createElement("textarea");
-//     notesInput.id = "dsaTrackerNotes";
-//     notesInput.placeholder = "Write your notes here...";
-//     notesInput.style.resize = "both";
-//     notesInput.style.overflow = "auto";
+    // Notes Input Field (Resizable)
+    const notesInput = document.createElement("textarea");
+    notesInput.id = "dsaTrackerNotes";
+    notesInput.placeholder = "Write your notes here...";
+    notesInput.style.resize = "both";
+    notesInput.style.overflow = "auto";
 
-//     // Buttons Container
-//     const buttonContainer = document.createElement("div");
-//     buttonContainer.className = "button-container";
+    // Buttons Container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "button-container";
 
-//     // Save Button
-//     const saveButton = document.createElement("button");
-//     saveButton.innerText = "Save";
-//     saveButton.className = "save-button";
-//     saveButton.onclick = function () {
-//         console.log(primaryKey,platformName,problemName,problemUrl,notesInput.value);
-//         saveNotes(primaryKey, platformName, problemName, problemUrl, notesInput.value);
-//         document.body.removeChild(popup);
-//     };
+    // Save Button
+    const saveButton = document.createElement("button");
+    saveButton.innerText = "Save";
+    saveButton.className = "save-button";
+    saveButton.onclick = function () {
+        console.log(primaryKey,platformName,problemName,problemUrl,notesInput.value);
+        saveNotes(primaryKey, platformName, problemName, problemUrl, notesInput.value);
+        document.body.removeChild(popup);
+    };
 
-//     // Cancel Button
-//     const cancelButton = document.createElement("button");
-//     cancelButton.innerText = "Cancel";
-//     cancelButton.className = "cancel-button";
-//     cancelButton.onclick = function () {
-//         togglePopup();
-//         document.body.removeChild(popup);
-//     };
+    // Cancel Button
+    const cancelButton = document.createElement("button");
+    cancelButton.innerText = "Cancel";
+    cancelButton.className = "cancel-button";
+    cancelButton.onclick = function () {
+        togglePopup();
+        document.body.removeChild(popup);
+    };
 
-//     buttonContainer.appendChild(saveButton);
-//     buttonContainer.appendChild(cancelButton);
-//     popup.appendChild(popupHeader);
-//     popup.appendChild(problemNameLabel);
-//     popup.appendChild(notesInput);
-//     popup.appendChild(buttonContainer);
-//     document.body.appendChild(popup);
+    buttonContainer.appendChild(saveButton);
+    buttonContainer.appendChild(cancelButton);
+    popup.appendChild(popupHeader);
+    popup.appendChild(problemNameLabel);
+    popup.appendChild(notesInput);
+    popup.appendChild(buttonContainer);
+    document.body.appendChild(popup);
 
-//     loadNotes(primaryKey, (data) => {
-//         if (data) {
-//             notesInput.value = data.notes;
-//         }
-//     });
+    loadNotes(primaryKey, (data) => {
+        if (data) {
+            notesInput.value = data.notes;
+        }
+    });
 
-//     makeDraggableAndResizable(popup, popupHeader);
-// }
+    makeDraggableAndResizable(popup, popupHeader);
+}
 
 // Function to make the popup draggable and resizable
 function makeDraggableAndResizable(popup, header) {
