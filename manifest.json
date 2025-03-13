@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "DSA",
+    "version": "2.0",
+    "author": "Abhay Nosran",
+    "description": "A Chrome extension",
+    "permissions": [
+      "tabs","storage"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css" : ["content-styles.css"]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js",
+      "type": "module"
+    },
+    "web_accessible_resources" : [
+      {
+        "resources": ["assets/bookmark.png"],
+        "matches" : ["<all_urls>"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        
+      },
+      "default_popup": "popup.html",
+      "default_title": "A tooltip popup description when you hover over the Chrome Extension icon."
+    }
+  }
+  

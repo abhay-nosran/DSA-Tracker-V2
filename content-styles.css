@@ -1,0 +1,173 @@
+/* Save Note Button */
+#dsaTrackerButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+#dsaTrackerButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Popup Styling - Positioned above the button */
+/* #dsaTrackerPopup {
+    position: fixed;
+    bottom: 80px; 
+    right: 20px; 
+    width: 270px; 
+    height: 180px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    
+   
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
+} */
+
+/* Show Popup Animation */
+#dsaTrackerPopup.show {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide Popup Animation */
+#dsaTrackerPopup.hide {
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Popup Title */
+#dsaTrackerPopup h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Label Styling */
+#dsaTrackerPopup label {
+    font-weight: bold;
+    color: #444;
+    margin-top: 5px;
+}
+
+/* Notes Input Field */
+#dsaTrackerNotes {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    color: black;
+    margin-top: 5px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: none;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+#dsaTrackerNotes:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0px 0px 6px rgba(0, 123, 255, 0.4);
+}
+
+/* Button Container */
+#dsaTrackerPopup .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Common Button Styling */
+#dsaTrackerPopup button {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Save Button */
+#dsaTrackerPopup .save-button {
+    background-color: #28a745;
+    color: white;
+    margin-right: 5px;
+}
+
+#dsaTrackerPopup .save-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Cancel Button */
+#dsaTrackerPopup .cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+#dsaTrackerPopup .cancel-button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Resizable Popup */
+#dsaTrackerPopup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
+    resize: both;
+    overflow: auto;
+}
+
+/* Draggable Header */
+#dsaTrackerPopupHeader {
+    cursor: move;
+    background-color: #f1f1f1;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}

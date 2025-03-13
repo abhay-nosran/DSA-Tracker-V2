@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Tracker</title>
+    <link rel="stylesheet" href="./popup.css">
+    <!-- <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            width: 320px;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        .problem-list {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .problem-item:last-child {
+            border-bottom: none;
+        }
+
+        .problem-item a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .problem-item a:hover {
+            text-decoration: underline;
+        }
+
+        .problem-item button {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .problem-item button:hover {
+            background: #45a049;
+        }
+
+        .problem-notes-container {
+            display: none;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-notes-container.active {
+            display: block;
+        }
+
+        #problem-notes-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #problem-notes-title a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        #problem-notes-title a:hover {
+            text-decoration: underline;
+        }
+
+        #problem-notes-content {
+            font-size: 1em;
+            line-height: 1.4;
+            color: #555;
+        }
+
+        .back-button, #download-csv {
+            background: #f44336;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .back-button:hover, #download-csv:hover {
+            background: #d32f2f;
+        }
+
+        #download-csv {
+            background: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        #download-csv:hover {
+            background: #45a049;
+        }
+    </style> -->
+</head>
+<body>
+    <h1>DSA Tracker</h1>
+    <button id="download-csv">Download CSV</button>
+    <div id="problem-list" class="problem-list">
+        <!-- Problem items will be listed here -->
+    </div>
+    
+    <div id="problem-notes-container" class="problem-notes-container">
+        <h2 id="problem-notes-title"><a href="#" target="_blank"></a></h2>
+        <p id="problem-notes-content"></p>
+        <button id="back-button" class="back-button">Back to List</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
+
