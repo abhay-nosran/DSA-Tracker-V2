@@ -189,28 +189,27 @@ function loadNotes(primaryKey, callback) {
 //     });
 // }
 
-async function saveNotes(primaryKey, platformName, problemName, problemUrl, notes) {
+async function saveNotes(primaryKey, platformName, problemName, problemUrl, notes, topic, status) {
     try {
-        // Retrieve the existing problem list from storage
         chrome.storage.local.get([trackerKey], function (result) {
-            let problemList = result[trackerKey] || {}; // If not found, initialize empty object
+            let problemList = result[trackerKey] || {};
 
-            // Update the problem details
             problemList[primaryKey] = {
                 platformName,
                 problemName,
                 problemUrl,
                 notes,
+                topic,
+                status
             };
-            console.log(problemList[primaryKey]);
-            // Save updated problem list back to storage
+
             chrome.storage.local.set({ [trackerKey]: problemList }, function () {
                 // console.log("Notes saved successfully:", problemList[primaryKey]);
                 alert("Notes saved successfully!");
             });
         });
     } catch (error) {
-        console.error("Error saving notes:", error);
+        console.error("Error saving problem details:", error);
     }
 }
 
@@ -248,7 +247,30 @@ function openPopup() {
     const problemNameLabel = document.createElement("label");
     problemNameLabel.innerText = `Problem: ${problemName}`;
 
+    // Topic Input
+    const topicLabel = document.createElement("label");
+    topicLabel.innerText = "Topic:";
+    const topicInput = document.createElement("input");
+    topicInput.type = "text";
+    topicInput.id = "dsaTrackerTopic";
+    topicInput.placeholder = "e.g., Dynamic Programming, Arrays, etc.";
+
+    // Status Selection
+    const statusLabel = document.createElement("label");
+    statusLabel.innerText = "Status:";
+    const statusSelect = document.createElement("select");
+    statusSelect.id = "dsaTrackerStatus";
+    const statusOptions = ["Not Solved", "Solved", "Revised"];
+    statusOptions.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        statusSelect.appendChild(optionElement);
+    });
+
     // Notes Input Field (Resizable)
+    const notesLabel = document.createElement("label");
+    notesLabel.innerText = "Notes:";
     const notesInput = document.createElement("textarea");
     notesInput.id = "dsaTrackerNotes";
     notesInput.placeholder = "Write your notes here...";
@@ -264,8 +286,15 @@ function openPopup() {
     saveButton.innerText = "Save";
     saveButton.className = "save-button";
     saveButton.onclick = function () {
-        console.log(primaryKey,platformName,problemName,problemUrl,notesInput.value);
-        saveNotes(primaryKey, platformName, problemName, problemUrl, notesInput.value);
+        saveNotes(
+            primaryKey, 
+            platformName, 
+            problemName, 
+            problemUrl, 
+            notesInput.value,
+            topicInput.value,
+            statusSelect.value
+        );
         document.body.removeChild(popup);
     };
 
@@ -278,17 +307,26 @@ function openPopup() {
         document.body.removeChild(popup);
     };
 
+    // Append all elements
     buttonContainer.appendChild(saveButton);
     buttonContainer.appendChild(cancelButton);
     popup.appendChild(popupHeader);
     popup.appendChild(problemNameLabel);
+    popup.appendChild(topicLabel);
+    popup.appendChild(topicInput);
+    popup.appendChild(statusLabel);
+    popup.appendChild(statusSelect);
+    popup.appendChild(notesLabel);
     popup.appendChild(notesInput);
     popup.appendChild(buttonContainer);
     document.body.appendChild(popup);
 
+    // Load existing data
     loadNotes(primaryKey, (data) => {
         if (data) {
-            notesInput.value = data.notes;
+            notesInput.value = data.notes || '';
+            topicInput.value = data.topic || '';
+            statusSelect.value = data.status || 'Not Solved';
         }
     });
 

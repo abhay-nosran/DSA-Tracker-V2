@@ -12,12 +12,14 @@ function getProblemList() {
 
 // Function to convert problem data to CSV format
 function convertToCSV(data) {
-    const headers = ["Platform", "Name", "URL", "Notes"];
+    const headers = ["Platform", "Name", "URL", "Topic", "Status", "Notes"];
     const rows = Object.values(data).map(problem => [
         `"${problem.platformName}"`,
         `"${problem.problemName}"`,
         `"${problem.problemUrl}"`,
-        `"${problem.notes}"`
+        `"${problem.topic || ''}"`,
+        `"${problem.status || 'Not Solved'}"`,
+        `"${problem.notes || ''}"`,
     ]);
     return [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
 }
