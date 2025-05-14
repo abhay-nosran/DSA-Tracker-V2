@@ -189,7 +189,7 @@ function loadNotes(primaryKey, callback) {
 //     });
 // }
 
-async function saveNotes(primaryKey, platformName, problemName, problemUrl, notes, topic, status) {
+async function saveNotes(primaryKey, platformName, problemName, problemUrl, notes, topic, status,revisionCount) {
     try {
         chrome.storage.local.get([trackerKey], function (result) {
             let problemList = result[trackerKey] || {};
@@ -200,7 +200,9 @@ async function saveNotes(primaryKey, platformName, problemName, problemUrl, note
                 problemUrl,
                 notes,
                 topic,
-                status
+                status,
+                revisions:revisionCount,
+                lastRevised: new Date().toISOString()
             };
 
             chrome.storage.local.set({ [trackerKey]: problemList }, function () {
@@ -271,11 +273,31 @@ function openPopup() {
     // Notes Input Field (Resizable)
     const notesLabel = document.createElement("label");
     notesLabel.innerText = "Notes:";
+    notesLabel.setAttribute("for", "dsaTrackerNotes");
     const notesInput = document.createElement("textarea");
     notesInput.id = "dsaTrackerNotes";
     notesInput.placeholder = "Write your notes here...";
     notesInput.style.resize = "both";
     notesInput.style.overflow = "auto";
+
+    // Add Revision Counter
+    const revisionContainer = document.createElement("div");
+    revisionContainer.className = "revision-container";
+    
+    const revisionCount = document.createElement("input");
+    revisionCount.type = "number";
+    revisionCount.id = "revisionCount";
+    revisionCount.min = "0";
+    revisionCount.value = "0";
+
+    const revisionLabel = document.createElement("label");
+    revisionLabel.innerText = "Revisions: ";
+    
+    revisionContainer.appendChild(revisionLabel);
+    revisionContainer.appendChild(revisionCount);
+
+    // Add before the buttons container
+    popup.appendChild(revisionContainer);
 
     // Buttons Container
     const buttonContainer = document.createElement("div");
@@ -286,6 +308,7 @@ function openPopup() {
     saveButton.innerText = "Save";
     saveButton.className = "save-button";
     saveButton.onclick = function () {
+        const count = parseInt(document.getElementById("revisionCount").value) || 0;
         saveNotes(
             primaryKey, 
             platformName, 
@@ -293,7 +316,8 @@ function openPopup() {
             problemUrl, 
             notesInput.value,
             topicInput.value,
-            statusSelect.value
+            statusSelect.value,
+            count
         );
         document.body.removeChild(popup);
     };
@@ -318,6 +342,7 @@ function openPopup() {
     popup.appendChild(statusSelect);
     popup.appendChild(notesLabel);
     popup.appendChild(notesInput);
+    popup.appendChild(revisionContainer);
     popup.appendChild(buttonContainer);
     document.body.appendChild(popup);
 
@@ -327,6 +352,7 @@ function openPopup() {
             notesInput.value = data.notes || '';
             topicInput.value = data.topic || '';
             statusSelect.value = data.status || 'Not Solved';
+            revisionCount.value = data.revisions || '0';
         }
     });
 

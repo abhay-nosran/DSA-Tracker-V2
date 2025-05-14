@@ -134,11 +134,21 @@
 </head>
 <body>
     <h1>DSA Tracker</h1>
-    <button id="download-csv">Download CSV</button>
+    <div class="controls">
+        <button id="download-csv">Download CSV</button>
+        <button id="show-revisions">Daily Revisions</button>
+    </div>
     <div id="problem-list" class="problem-list">
         <!-- Problem items will be listed here -->
     </div>
-    
+    <div id="daily-revisions-container" class="daily-revisions-container">
+        <h2>Daily Revisions</h2>
+        <div id="daily-revisions-list">
+            <!-- Daily revisions will be listed here -->
+        </div>
+        <button id="back-from-revisions" class="back-button">Close</button>
+
+    </div>
     <div id="problem-notes-container" class="problem-notes-container">
         <h2 id="problem-notes-title"><a href="#" target="_blank"></a></h2>
         <p id="problem-notes-content"></p>
